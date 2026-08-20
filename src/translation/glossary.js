@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const AhoCorasick = require('modern-ahocorasick');
 
 const GLOSSARY_PATH = path.join(__dirname, 'glossary.json');
 
@@ -26,8 +27,6 @@ const loadGlossary = () => {
   }
 };
 
-const glossaryEntries = loadGlossary();
-
 /**
  * @param {GlossaryEntry} entry
  * @returns {string[]}
@@ -37,18 +36,20 @@ const termsForEntry = (entry) => {
   return [...new Set(terms.map((t) => String(t).trim()).filter(Boolean))];
 };
 
-/** @type {Array<{ phrase: string, normalized: string, entry: GlossaryEntry }>} */
-const phraseIndex = [];
-for (const entry of glossaryEntries) {
-  const seen = new Set();
-  for (const phrase of termsForEntry(entry)) {
-    const normalized = phrase.toLowerCase().replace(/\s+/g, ' ');
-    if (!normalized || seen.has(normalized)) continue;
-    seen.add(normalized);
-    phraseIndex.push({ phrase, normalized, entry });
-  }
-}
-phraseIndex.sort((a, b) => b.normalized.length - a.normalized.length);
+/**
+ * @param {string} phrase
+ * @returns {string}
+ */
+const normalizePhrase = (phrase) =>
+  String(phrase || '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+
+/**
+ * @param {string} text
+ * @returns {string}
+ */
+const normalizeHaystack = (text) => normalizePhrase(text);
 
 /**
  * @param {string} ch
@@ -57,54 +58,17 @@ phraseIndex.sort((a, b) => b.normalized.length - a.normalized.length);
 const isLetter = (ch) => !!ch && /\p{L}/u.test(ch);
 
 /**
- * @param {string} text
- * @returns {string}
- */
-const normalizeHaystack = (text) =>
-  String(text || '')
-    .toLowerCase()
-    .replace(/\s+/g, ' ');
-
-/**
- * Word-boundary phrase search on a normalized (lowercased, collapsed space) haystack.
+ * Word-boundary check on a normalized haystack at [start, start+length).
  *
  * @param {string} haystack
- * @param {string} needle
+ * @param {number} start
+ * @param {number} length
  * @returns {boolean}
  */
-const containsPhrase = (haystack, needle) => {
-  if (!haystack || !needle) return false;
-  let from = 0;
-  while (from <= haystack.length - needle.length) {
-    const i = haystack.indexOf(needle, from);
-    if (i < 0) return false;
-    const before = i === 0 ? '' : haystack[i - 1];
-    const after = haystack[i + needle.length] || '';
-    if (!isLetter(before) && !isLetter(after)) return true;
-    from = i + 1;
-  }
-  return false;
-};
-
-/**
- * Glossary entries that appear in STT/TTS text (terms or aliases).
- *
- * @param {string} text
- * @returns {GlossaryEntry[]}
- */
-const findGlossaryMatches = (text) => {
-  const haystack = normalizeHaystack(text);
-  if (!haystack) return [];
-
-  const matched = [];
-  const seen = new Set();
-  for (const { normalized, entry } of phraseIndex) {
-    if (seen.has(entry.term)) continue;
-    if (!containsPhrase(haystack, normalized)) continue;
-    seen.add(entry.term);
-    matched.push(entry);
-  }
-  return matched;
+const hasWordBoundary = (haystack, start, length) => {
+  const before = start === 0 ? '' : haystack[start - 1];
+  const after = haystack[start + length] || '';
+  return !isLetter(before) && !isLetter(after);
 };
 
 /**
@@ -115,6 +79,117 @@ const phraseRegex = (phrase) => {
   const escaped = String(phrase).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const spaced = escaped.replace(/\s+/g, '\\s+');
   return new RegExp(`(?<!\\p{L})${spaced}(?!\\p{L})`, 'giu');
+};
+
+/**
+ * Builds Aho-Corasick automaton and phrase -> glossary-entry lookup at startup.
+ *
+ * @param {GlossaryEntry[]} glossaryEntries
+ * @returns {{
+ *   phraseMatcher: import('modern-ahocorasick'),
+ *   phraseByNormalized: Map<string, GlossaryEntry[]>,
+ *   regexByPhrase: Map<string, RegExp> // lazily filled
+ * }}
+ */
+const buildGlossaryIndex = (glossaryEntries) => {
+  /** @type {Map<string, PhraseIndexItem[]>} */
+  const phraseByNormalized = new Map();
+  /** @type {Map<string, RegExp>} Lazily compiled on first use */
+  const regexByPhrase = new Map();
+
+  for (const entry of glossaryEntries) {
+    const seen = new Set();
+    for (const phrase of termsForEntry(entry)) {
+      const normalized = normalizePhrase(phrase);
+      if (!normalized || seen.has(normalized)) continue;
+      seen.add(normalized);
+
+      if (!phraseByNormalized.has(normalized)) {
+        phraseByNormalized.set(normalized, []);
+      }
+      phraseByNormalized.get(normalized).push(entry);
+    }
+  }
+
+  const normalizedPatterns = [...phraseByNormalized.keys()];
+  const phraseMatcher = new AhoCorasick(normalizedPatterns);
+
+  return { phraseMatcher, phraseByNormalized, regexByPhrase };
+};
+
+const glossaryEntries = loadGlossary();
+const { phraseMatcher, phraseByNormalized, regexByPhrase } = buildGlossaryIndex(glossaryEntries);
+
+/** @type {Map<string, string[]>} */
+const entryTermsSortedDescCache = new Map();
+/** @type {Map<string, string[]>} */
+const entryTermsCache = new Map();
+/** @type {Map<string, string[]>} */
+const entryAliasesSortedDescCache = new Map();
+
+for (const entry of glossaryEntries) {
+  const terms = termsForEntry(entry);
+  entryTermsCache.set(entry.term, terms);
+  entryTermsSortedDescCache.set(entry.term, [...terms].sort((a, b) => b.length - a.length));
+
+  const aliases = (entry.aliases || [])
+    .filter(Boolean)
+    .map((a) => String(a).trim())
+    .filter(Boolean)
+    .filter((a) => a.toLowerCase() !== String(entry.term).toLowerCase())
+    // Keep aliases even if they equal `sayAs`; those are needed for STT -> canonical replacement.
+    ;
+
+  entryAliasesSortedDescCache.set(entry.term, [...aliases].sort((a, b) => b.length - a.length));
+}
+
+/**
+ * Returns precompiled word-boundary regex for a glossary phrase.
+ *
+ * @param {string} phrase
+ * @returns {RegExp}
+ */
+const getPhraseRegex = (phrase) => {
+  const cached = regexByPhrase.get(phrase);
+  if (cached) return cached;
+  const compiled = phraseRegex(phrase);
+  regexByPhrase.set(phrase, compiled);
+  return compiled;
+};
+
+/**
+ * Glossary entries that appear in STT/TTS text (terms or aliases).
+ * Uses Aho-Corasick for O(n) multi-pattern search, then word-boundary filtering.
+ *
+ * @param {string} text
+ * @returns {GlossaryEntry[]}
+ */
+const findGlossaryMatches = (text) => {
+  const haystack = normalizeHaystack(text);
+  if (!haystack) return [];
+
+  /** @type {Map<string, { entry: GlossaryEntry, matchedLength: number }>} */
+  const matchedByTerm = new Map();
+
+  // modern-ahocorasick reports the inclusive end index of each match, not the start.
+  for (const [endIndex, patterns] of phraseMatcher.search(haystack)) {
+    for (const normalized of patterns) {
+      const matchStart = endIndex - normalized.length + 1;
+      if (matchStart < 0 || !hasWordBoundary(haystack, matchStart, normalized.length)) continue;
+
+      const items = phraseByNormalized.get(normalized) || [];
+      for (const entry of items) {
+        const existing = matchedByTerm.get(entry.term);
+        if (!existing || normalized.length > existing.matchedLength) {
+          matchedByTerm.set(entry.term, { entry, matchedLength: normalized.length });
+        }
+      }
+    }
+  }
+
+  return [...matchedByTerm.values()]
+    .sort((a, b) => b.matchedLength - a.matchedLength)
+    .map(({ entry }) => entry);
 };
 
 /**
@@ -132,10 +207,10 @@ const protectPreservedTerms = (text) => {
   let i = 0;
   for (const entry of matches) {
     const token = `__GLOSS_${i}__`;
-    const phrases = termsForEntry(entry).slice().sort((a, b) => b.length - a.length);
+    const phrases = entryTermsSortedDescCache.get(entry.term) || termsForEntry(entry).sort((a, b) => b.length - a.length);
     let replaced = false;
     for (const phrase of phrases) {
-      const next = out.replace(phraseRegex(phrase), token);
+      const next = out.replace(getPhraseRegex(phrase), token);
       if (next !== out) {
         out = next;
         replaced = true;
@@ -166,8 +241,8 @@ const restorePreservedTerms = (text, slots) => {
       out = out.split(slot.token).join(spoken);
       continue;
     }
-    const hasTerm = phraseRegex(slot.term).test(out);
-    const hasSpoken = slot.sayAs ? phraseRegex(slot.sayAs).test(out) : false;
+    const hasTerm = getPhraseRegex(slot.term).test(out);
+    const hasSpoken = slot.sayAs ? getPhraseRegex(slot.sayAs).test(out) : false;
     if (!hasTerm && !hasSpoken) {
       out = `${out} ${spoken}`.trim();
     }
@@ -225,17 +300,14 @@ const applySpokenForms = (text) => {
   if (!out) return out;
 
   const matches = findGlossaryMatches(out);
-  const replacements = [];
   for (const entry of matches) {
     if (!entry.sayAs) continue;
-    for (const term of termsForEntry(entry)) {
-      if (term.toLowerCase() === String(entry.sayAs).toLowerCase()) continue;
-      replacements.push({ term, sayAs: entry.sayAs });
+    const sayAsLower = String(entry.sayAs).toLowerCase();
+    const termsSorted = entryTermsSortedDescCache.get(entry.term) || termsForEntry(entry).sort((a, b) => b.length - a.length);
+    for (const term of termsSorted) {
+      if (term.toLowerCase() === sayAsLower) continue;
+      out = out.replace(getPhraseRegex(term), entry.sayAs);
     }
-  }
-  replacements.sort((a, b) => b.term.length - a.term.length);
-  for (const { term, sayAs } of replacements) {
-    out = out.replace(phraseRegex(term), sayAs);
   }
   return out;
 };
@@ -251,12 +323,13 @@ const stripGlossaryTerms = (text) => {
   const matches = findGlossaryMatches(out);
   const phrases = [];
   for (const entry of matches) {
-    phrases.push(...termsForEntry(entry));
+    const terms = entryTermsCache.get(entry.term) || termsForEntry(entry);
+    phrases.push(...terms);
     if (entry.sayAs) phrases.push(entry.sayAs);
   }
   phrases.sort((a, b) => b.length - a.length);
   for (const phrase of phrases) {
-    out = out.replace(phraseRegex(phrase), ' ');
+    out = out.replace(getPhraseRegex(phrase), ' ');
   }
   return out.replace(/\s+/g, ' ').trim();
 };
@@ -274,14 +347,12 @@ const canonicalizeGlossaryTerms = (text) => {
   const matches = findGlossaryMatches(out);
   const replacements = [];
   for (const entry of matches) {
-    for (const alias of entry.aliases || []) {
-      if (!alias || alias.toLowerCase() === entry.term.toLowerCase()) continue;
-      replacements.push({ from: alias, to: entry.term });
-    }
+    const aliases = entryAliasesSortedDescCache.get(entry.term) || [];
+    for (const alias of aliases) replacements.push({ from: alias, to: entry.term });
   }
   replacements.sort((a, b) => b.from.length - a.from.length);
   for (const { from, to } of replacements) {
-    out = out.replace(phraseRegex(from), to);
+    out = out.replace(getPhraseRegex(from), to);
   }
   return out;
 };
