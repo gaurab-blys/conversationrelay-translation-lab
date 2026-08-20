@@ -1,24 +1,2543 @@
 [
   {
     "term": "Blys",
-    "aliases": ["Bliss"],
+    "aliases": [
+      "Bliss",
+      "getblys",
+      "Get Blys"
+    ],
     "kind": "brand",
     "preserve": true,
     "sayAs": "Bliss",
-    "note": "Company name. Keep the brand. Pronounce as Bliss."
+    "note": "Company name from getblys.com. Keep the brand. Pronounce as Bliss."
   },
   {
     "term": "Gaurab",
-    "aliases": ["Gaurav"],
+    "aliases": [
+      "Gaurav"
+    ],
     "kind": "person",
     "preserve": true,
     "note": "Person name. Do not translate."
   },
   {
-    "term": "Remedial Deep Tissue",
-    "aliases": ["remedial deep tissue massage"],
+    "term": "Swedish Relaxation",
+    "aliases": [
+      "Swedish / Relaxation",
+      "Swedish Relaxation Massage",
+      "Swedish Massage",
+      "Swedish"
+    ],
     "kind": "service",
     "preserve": true,
-    "note": "Service name. Keep in English."
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Remedial Deep Tissue",
+    "aliases": [
+      "Remedial / Deep Tissue",
+      "Remedial Deep Tissue Massage",
+      "remedial deep tissue massage",
+      "Deep Tissue Massage",
+      "Deep Tissue",
+      "Remedial Massage",
+      "Remedial"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com / AU remedial naming. Keep in English."
+  },
+  {
+    "term": "Sports Massage",
+    "aliases": [
+      "Sports"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Pregnancy Massage",
+    "aliases": [
+      "Prenatal Massage",
+      "Prenatal",
+      "Pregnancy"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Prenatal on getblys.com US menu. Keep in English."
+  },
+  {
+    "term": "Aromatherapy",
+    "aliases": [
+      "Aromatherapy Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Lymphatic Drainage",
+    "aliases": [
+      "Lymphatic Drainage Massage",
+      "Lymphatic Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Hot Stone",
+    "aliases": [
+      "Hot Stone Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Scalp and Head",
+    "aliases": [
+      "Scalp / Head Massage",
+      "Scalp and Head Massage",
+      "Scalp Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Massage treatment. Keep in English."
+  },
+  {
+    "term": "Reflexology",
+    "aliases": [
+      "Reflexology Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Thai Massage",
+    "aliases": [
+      "Thai"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Cupping",
+    "aliases": [
+      "Cupping Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com US services menu. Keep in English."
+  },
+  {
+    "term": "Oncology Massage",
+    "aliases": [
+      "Oncology"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services menu. Keep in English."
+  },
+  {
+    "term": "Medical Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services menu. Keep in English."
+  },
+  {
+    "term": "Hotel Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services menu. Keep in English."
+  },
+  {
+    "term": "Aged Care Massage",
+    "aliases": [
+      "Aged Care",
+      "Aged care",
+      "aged_care",
+      "Aged Care & Disability"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services and location types. Keep in English."
+  },
+  {
+    "term": "Home Care Massage",
+    "aliases": [
+      "Home Care Package",
+      "Home Care",
+      "Homecare",
+      "Home care",
+      "homecare"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com services and location types. Keep in English."
+  },
+  {
+    "term": "Chair Massage",
+    "aliases": [
+      "Chair massage",
+      "Corporate (Chair)",
+      "Desk Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Corporate / group offering on getblys.com. Keep in English."
+  },
+  {
+    "term": "Table Massage",
+    "aliases": [
+      "Table massage",
+      "Corporate (Table)"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Corporate massage type. Keep in English."
+  },
+  {
+    "term": "Roving Massage",
+    "aliases": [
+      "Roving massage",
+      "Corporate (Roving)"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Corporate massage type. Keep in English."
+  },
+  {
+    "term": "Corporate Massage",
+    "aliases": [
+      "Corporate",
+      "Workplace & Events",
+      "Wellness Days"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com corporate / events offerings. Keep in English."
+  },
+  {
+    "term": "Mobile Massage",
+    "aliases": [
+      "Mobile Spa",
+      "In-home Massage",
+      "At Home Massage",
+      "Home Massage"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Core product phrasing on getblys.com. Keep in English."
+  },
+  {
+    "term": "Couples Massage",
+    "aliases": [
+      "Couples booking",
+      "Couples"
+    ],
+    "kind": "session",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Singles Massage",
+    "aliases": [
+      "Single Massage",
+      "Singles"
+    ],
+    "kind": "session",
+    "preserve": true,
+    "note": "Session type. Keep in English."
+  },
+  {
+    "term": "Back to Back",
+    "aliases": [
+      "Back-to-back",
+      "Back to back",
+      "backtoback"
+    ],
+    "kind": "session",
+    "preserve": true,
+    "note": "Session type on getblys.com couples flow. Keep in English."
+  },
+  {
+    "term": "Group Booking",
+    "aliases": [
+      "Group Bookings",
+      "Group booking",
+      "groupbooking",
+      "Group Massage"
+    ],
+    "kind": "session",
+    "preserve": true,
+    "note": "From getblys.com services. Keep in English."
+  },
+  {
+    "term": "Facials",
+    "aliases": [
+      "Signature Facial",
+      "Mobile Facial",
+      "Facial"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Beauty category on getblys.com. Keep in English."
+  },
+  {
+    "term": "Pamper Packages",
+    "aliases": [
+      "Pamper Package"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com other services. Keep in English."
+  },
+  {
+    "term": "Hair and Makeup",
+    "aliases": [
+      "Hair and Makeup packages",
+      "Makeup & Hair Styling",
+      "Makeup and Hair Styling"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com beauty menu. Keep in English."
+  },
+  {
+    "term": "Haircuts",
+    "aliases": [
+      "Blow Dry",
+      "Blow Drys",
+      "Up-dos",
+      "Up dos"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Hair services mentioned on getblys.com. Keep in English."
+  },
+  {
+    "term": "Hair Colouring",
+    "aliases": [
+      "Hair Coloring",
+      "Hair Colour",
+      "Hair Color"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Beauty service. Keep in English."
+  },
+  {
+    "term": "Bridal",
+    "aliases": [
+      "Bridal Makeup",
+      "Bridal and Baby Showers"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Beauty / events phrasing on getblys.com. Keep in English."
+  },
+  {
+    "term": "Brows & Lashes",
+    "aliases": [
+      "Brows and Lashes",
+      "Lash Lift",
+      "Lash Extensions",
+      "Brow Waxing",
+      "Brow Tinting"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com beauty menu. Keep in English."
+  },
+  {
+    "term": "Spray Tan",
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com beauty menu. Keep in English."
+  },
+  {
+    "term": "Waxing",
+    "kind": "service",
+    "preserve": true,
+    "note": "From getblys.com beauty menu. Keep in English."
+  },
+  {
+    "term": "Gel Shellac",
+    "aliases": [
+      "Gel Shellac Manicure",
+      "Gel Shellac Pedicure",
+      "Gel Nails",
+      "Manicure",
+      "Pedicure",
+      "Mani-pedi",
+      "Mani Pedi"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Nail services from getblys.com. Keep in English."
+  },
+  {
+    "term": "Yoga",
+    "kind": "service",
+    "preserve": true,
+    "note": "Wellness service listed on help.getblys.com. Keep in English."
+  },
+  {
+    "term": "Pilates",
+    "kind": "service",
+    "preserve": true,
+    "note": "Wellness service listed on help.getblys.com. Keep in English."
+  },
+  {
+    "term": "Physiotherapy",
+    "aliases": [
+      "Physical Therapy",
+      "Physio"
+    ],
+    "kind": "service",
+    "preserve": true,
+    "note": "Clinical / home-care offering on getblys.com. Keep in English."
+  },
+  {
+    "term": "Dry Needling",
+    "kind": "service",
+    "preserve": true,
+    "note": "Clinical treatment on getblys.com location pages. Keep in English."
+  },
+  {
+    "term": "Telehealth",
+    "kind": "service",
+    "preserve": true,
+    "note": "Online clinical services on help.getblys.com. Keep in English."
+  },
+  {
+    "term": "Gift Voucher",
+    "aliases": [
+      "Gift Vouchers",
+      "Massage Gift Voucher",
+      "Buy as gift"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product CTA on getblys.com. Keep in English."
+  },
+  {
+    "term": "Provider Directory",
+    "aliases": [
+      "provider directory"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking flow term on getblys.com / help center. Keep in English."
+  },
+  {
+    "term": "Direct Booking",
+    "aliases": [
+      "direct booking",
+      "Book directly"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking flow term. Keep in English."
+  },
+  {
+    "term": "Past Bookings",
+    "aliases": [
+      "past bookings"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Account UI phrase on getblys.com FAQ. Keep in English."
+  },
+  {
+    "term": "Favourites",
+    "aliases": [
+      "Favorites",
+      "favourites list",
+      "favorites list"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "App UI phrase on getblys.com FAQ. Keep in English."
+  },
+  {
+    "term": "Rebook",
+    "aliases": [
+      "re-book",
+      "rebook"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking action on getblys.com FAQ. Keep in English."
+  },
+  {
+    "term": "Notes for Therapist",
+    "aliases": [
+      "notes for therapist"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking form field on getblys.com FAQ. Keep in English."
+  },
+  {
+    "term": "Massage Table",
+    "aliases": [
+      "massage chair",
+      "Massage Chair"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Equipment phrasing clients/agents discuss. Keep in English."
+  },
+  {
+    "term": "Platform Fee",
+    "aliases": [
+      "Processing Fee",
+      "10% processing fee",
+      "10% platform fee"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Pricing term on getblys.com. Keep in English."
+  },
+  {
+    "term": "Health Fund",
+    "aliases": [
+      "health fund rebate",
+      "Health Fund Rebate"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "AU rebate phrasing on getblys.com FAQ. Keep in English."
+  },
+  {
+    "term": "Cancellation Policy",
+    "aliases": [
+      "cancellation policy"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Policy term on getblys.com. Keep in English."
+  },
+  {
+    "term": "Same Day",
+    "aliases": [
+      "same-day",
+      "Same-day"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Availability phrasing on getblys.com. Keep in English."
+  },
+  {
+    "term": "One off",
+    "aliases": [
+      "One-off",
+      "One off booking"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking frequency UI label."
+  },
+  {
+    "term": "Every week",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking frequency UI label."
+  },
+  {
+    "term": "Every 2 weeks",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking frequency UI label."
+  },
+  {
+    "term": "Every 3 weeks",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking frequency UI label."
+  },
+  {
+    "term": "Every 4 weeks",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Booking frequency UI label."
+  },
+  {
+    "term": "Afterpay",
+    "aliases": [
+      "After Pay"
+    ],
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method. Keep brand name."
+  },
+  {
+    "term": "Klarna",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method. Keep brand name."
+  },
+  {
+    "term": "PayPal",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method. Keep brand name."
+  },
+  {
+    "term": "Apple Pay",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method. Keep brand name."
+  },
+  {
+    "term": "Google Pay",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method. Keep brand name."
+  },
+  {
+    "term": "NDIS",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / funding scheme. Keep acronym."
+  },
+  {
+    "term": "HSA",
+    "aliases": [
+      "HSA/FSA",
+      "HSA FSA",
+      "FSA"
+    ],
+    "kind": "payment",
+    "preserve": true,
+    "note": "US health payment method. Keep acronym."
+  },
+  {
+    "term": "Pay with Invoice",
+    "aliases": [
+      "payWithInvoice"
+    ],
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment method UI label."
+  },
+  {
+    "term": "Stand alone only",
+    "aliases": [
+      "Standalone only",
+      "Stand alone"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Treatment type UI label."
+  },
+  {
+    "term": "Add-on only",
+    "aliases": [
+      "Addon only",
+      "Add-on"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Treatment type UI label."
+  },
+  {
+    "term": "Stand alone and add-on",
+    "aliases": [
+      "Standalone and add-on"
+    ],
+    "kind": "ui",
+    "preserve": true,
+    "note": "Treatment type UI label."
+  },
+  {
+    "term": "Spa Clinic Gym",
+    "aliases": [
+      "spa_clinic_gym",
+      "Spa / Clinic / Gym"
+    ],
+    "kind": "location",
+    "preserve": true,
+    "note": "Location type. Keep in English."
+  },
+  {
+    "term": "Blys App",
+    "kind": "brand",
+    "preserve": true,
+    "note": "Product name. Keep the brand. Pronounce Blys as Bliss.",
+    "sayAs": "Bliss App"
+  },
+  {
+    "term": "Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking ID",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Status",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Confirmation",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Details",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Request",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Time",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Date",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Booking Duration",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Cancellation",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking History",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "New Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Upcoming Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Past Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Cancelled Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Completed Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Pending Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Reschedule Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Cancel Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Confirm Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Modify Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Type",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Details",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Duration",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Price",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Fee",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Home Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Mobile Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Massage Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Beauty Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Wellness Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Provider",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Profile",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Details",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Availability",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Rating",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Review",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Location",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Fee",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Status",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client Details",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client Address",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client Location",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Availability",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Available Time Slot",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Time Slot",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Preferred Time",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Preferred Date",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Available Provider",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Service Area",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Location",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Address",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Saved Address",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Arrival Time",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Estimated Arrival Time",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Payment",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Method",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Status",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Confirmation",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Failed",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Pending",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund Status",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Cancellation",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Cancellation Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Cancellation Reason",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Late Cancellation",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "No-show",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English.",
+    "aliases": [
+      "No show",
+      "Noshow"
+    ]
+  },
+  {
+    "term": "Accept Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Decline Booking",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Job",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Job Details",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Job Status",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Show Job",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Message",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Messages",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Conversation",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Inbox",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Unread Message",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Send Message",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Message Notification",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Push Notification",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Notification",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Profile",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Account",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Customer Support",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Support Request",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Coupon",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Discount Code",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Total Price",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Subtotal",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Tip",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Review",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Rating",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Five Star Rating",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Provider",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Professional",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Massage Therapist",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Beauty Therapist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Wellness Therapist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Type",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Duration",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Price",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Relaxation Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Beauty Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Wellness Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Appointment",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Appointment Time",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Appointment Date",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Appointment Status",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Appointment Confirmation",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service Request",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service Request Status",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Request Accepted",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Request Declined",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Request Cancelled",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Request Pending",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Provider Accepted",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Declined",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Cancelled",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client Cancelled",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Client Request",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Provider Request",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Booking Link",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Page",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Flow",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Checkout",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Checkout Page",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Order Summary",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Price Breakdown",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Cost",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Travel Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Cancellation Charge",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Payment Link",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Receipt",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Invoice",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Invoice Number",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Credit Card",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Debit Card",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Card Payment",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Online Payment",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Processing",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Completed",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Declined",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Error",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Refund",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund Policy",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund Request",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Refund Completed",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Promo Code",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Promotion",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Discount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Discount Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Discount Applied",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Coupon Code",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Coupon Expiry",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Tip Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Tip Payment",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Earnings",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Provider Earnings",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Provider Payout",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payout Status",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payout Date",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payout Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Availability Status",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Available",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Unavailable",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Online",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Offline",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Working Hours",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service Hours",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Travel Time",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Travel Distance",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Arrival",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Arrived",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "On the Way",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service Started",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Completed",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Completed",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Declined",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Expired",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Booking Reference",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Spa Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Therapy",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Qualified Therapist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Professional Therapist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Practitioner",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Specialist",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Profile",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Details",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Availability",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Rating",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Review",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Experience",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Qualification",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Speciality",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Location",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Arrival",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Travel Time",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Therapist Status",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Service Category",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Name",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Description",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Availability",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Service Location",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Selection",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Option",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service Package",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Menu",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Available Services",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Selected Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Primary Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Main Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Additional Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Add-ons",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English.",
+    "aliases": [
+      "Addons",
+      "Add ons"
+    ]
+  },
+  {
+    "term": "Add-on Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Option",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Price",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Cost",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Duration",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Add-on Selection",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Selected Add-on",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Optional Add-on",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Additional Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Extra Service",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Extra Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Upgrade",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Upgrade",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Upgrade",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Package Upgrade",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Premium Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Standard Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Specialised Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Custom Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Custom Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Massage Type",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Postnatal Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Foot Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Head Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Neck Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Shoulder Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Back Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Full Body Massage",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Skincare Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Body Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Area",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Preference",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Pressure Preference",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Massage Pressure",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Firm Pressure",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Medium Pressure",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Light Pressure",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Room",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Treatment Table",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Massage Oil",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Essential Oil",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Aromatherapy Oil",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Towel",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Linen",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Equipment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Therapist Equipment",
+    "kind": "role",
+    "preserve": true,
+    "note": "Role / person type. Keep in English."
+  },
+  {
+    "term": "Service Equipment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Mobile Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "In-home Treatment",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "At-home Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Home Beauty Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Home Wellness Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "30-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "45-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "60-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "75-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "90-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "120-minute Service",
+    "kind": "service",
+    "preserve": true,
+    "note": "Service / treatment term. Keep in English."
+  },
+  {
+    "term": "Service Start Time",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Service End Time",
+    "kind": "ui",
+    "preserve": true,
+    "note": "Product UI / domain term. Keep in English."
+  },
+  {
+    "term": "Arrival Window",
+    "kind": "booking",
+    "preserve": true,
+    "note": "Booking / scheduling term. Keep in English."
+  },
+  {
+    "term": "Payment Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Details",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Authorisation",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Authorised",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Verification",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Request",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment History",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Transaction",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Transaction ID",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Transaction Status",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Transaction Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Transaction Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Digital Payment",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Payment Gateway",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Billing",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Billing Details",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Billing Address",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Invoice Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Invoice Status",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Tax",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "GST",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Tax acronym. Keep as GST."
+  },
+  {
+    "term": "Service Charge",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Additional Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Late Cancellation Fee",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
+  },
+  {
+    "term": "Total Amount",
+    "kind": "payment",
+    "preserve": true,
+    "note": "Payment / billing term. Keep in English."
   }
 ]
