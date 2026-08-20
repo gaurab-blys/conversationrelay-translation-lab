@@ -1,0 +1,24 @@
+[
+  {
+    "term": "Blys",
+    "aliases": ["Bliss"],
+    "kind": "brand",
+    "preserve": true,
+    "sayAs": "Bliss",
+    "note": "Company name. Keep the brand. Pronounce as Bliss."
+  },
+  {
+    "term": "Gaurab",
+    "aliases": ["Gaurav"],
+    "kind": "person",
+    "preserve": true,
+    "note": "Person name. Do not translate."
+  },
+  {
+    "term": "Remedial Deep Tissue",
+    "aliases": ["remedial deep tissue massage"],
+    "kind": "service",
+    "preserve": true,
+    "note": "Service name. Keep in English."
+  }
+]

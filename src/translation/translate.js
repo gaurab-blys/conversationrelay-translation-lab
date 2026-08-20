@@ -1,4 +1,12 @@
 const config = require('../config');
+const {
+  applySpokenForms,
+  canonicalizeGlossaryTerms,
+  formatGlossaryForPrompt,
+  protectPreservedTerms,
+  restorePreservedTerms,
+  stripGlossaryTerms,
+} = require('./glossary');
 
 // Very small in-memory cache to avoid repeating translations for common short phrases.
 // This is per-process (ok for a dev lab) and keeps latency down.
@@ -54,6 +62,8 @@ const toSpeechReadyText = (s) => {
 
   // Remove surrounding quotes the model might return.
   out = out.replace(/^["']|["']$/g, '');
+
+  out = applySpokenForms(out);
 
   // Ensure a terminal punctuation mark helps TTS cadence.
   if (!/[.!?。！？]$/.test(out)) out += '.';
@@ -174,7 +184,8 @@ const languageDisplayName = (language) => {
 const scriptsForLanguage = (language) => LANGUAGE_SCRIPTS[languagePrefix(language)] || ['latin'];
 
 /**
- * True when output still uses a source-language script that the target language does not use.
+ * True when the output never switched into the target script (still fully in the source language).
+ * Mixed output is allowed: a word may be kept in the source language when translating it would change the meaning.
  *
  * @param {string} text
  * @param {string} targetLanguage
@@ -182,27 +193,21 @@ const scriptsForLanguage = (language) => LANGUAGE_SCRIPTS[languagePrefix(languag
  * @returns {boolean}
  */
 const hasWrongScriptForTarget = (text, targetLanguage, sourceLanguage) => {
-  const value = String(text || '');
+  const value = stripGlossaryTerms(String(text || '').replace(/__GLOSS_\d+__/g, ' '));
   if (!value) return false;
 
   const targetScripts = scriptsForLanguage(targetLanguage);
   const sourceScripts = scriptsForLanguage(sourceLanguage || '');
   const sourceOnlyScripts = sourceScripts.filter((script) => !targetScripts.includes(script));
 
-  if (sourceOnlyScripts.some((script) => SCRIPT_RANGES[script] && SCRIPT_RANGES[script].test(value))) {
-    return true;
-  }
-
   const usesTargetScript = targetScripts.some(
     (script) => SCRIPT_RANGES[script] && SCRIPT_RANGES[script].test(value)
   );
-  const targetIsNonLatin = !targetScripts.includes('latin');
-  const sourceIsLatin = sourceScripts.includes('latin') && sourceScripts.every((s) => s === 'latin');
-  if (targetIsNonLatin && sourceIsLatin && !usesTargetScript && SCRIPT_RANGES.latin.test(value)) {
-    return true;
-  }
+  const usesSourceOnlyScript = sourceOnlyScripts.some(
+    (script) => SCRIPT_RANGES[script] && SCRIPT_RANGES[script].test(value)
+  );
 
-  return false;
+  return usesSourceOnlyScript && !usesTargetScript;
 };
 
 /**
@@ -213,7 +218,13 @@ const hasWrongScriptForTarget = (text, targetLanguage, sourceLanguage) => {
  * @param {boolean} [params.strict]
  * @returns {string}
  */
-const buildTranslationPrompt = ({ text, sourceLanguage, targetLanguage, strict = false }) => {
+const buildTranslationPrompt = ({
+  text,
+  sourceLanguage,
+  targetLanguage,
+  strict = false,
+  slots = [],
+}) => {
   const sourceName = languageDisplayName(sourceLanguage);
   const targetName = languageDisplayName(targetLanguage);
   const lines = [
@@ -222,18 +233,22 @@ const buildTranslationPrompt = ({ text, sourceLanguage, targetLanguage, strict =
     `Source language: ${sourceName} (${sourceLanguage})`,
     `Target language: ${targetName} (${targetLanguage})`,
     `Requirements:`,
-    `- Return ONLY the translated speech text in ${targetName}.`,
-    `- The entire utterance must be ${targetName}: words, dates, times, numbers, money, addresses, weekdays, months, and years.`,
-    `- Say dates and numbers the way a native ${targetName} speaker would say them aloud, not as leftover source-language words or source script.`,
-    `- Do not mix languages. If the speaker code-switches, still output only ${targetName}.`,
-    `- Preserve meaning, but make it sound natural for ${targetName}.`,
+    `- Return ONLY the translated speech (no quotes, headings, or explanations).`,
+    `- Prefer ${targetName} for the utterance, including dates, times, numbers, money, addresses, weekdays, months, and years.`,
+    `- Say dates and numbers the way a native ${targetName} speaker would say them aloud.`,
+    `- Mixing languages is preferred when a word would change meaning if translated (false friends, domain terms, or words whose native sense differs in ${targetName}). Keep that word in the source language.`,
+    `- Always copy protected English business names/tokens listed below unchanged.`,
+    `- Otherwise preserve meaning and sound natural for a phone call in ${targetName}.`,
     `- Add appropriate punctuation for speech (commas/periods) when needed.`,
-    `- Do not add quotes, headings, or explanations.`,
     `- Keep the full meaning; do not summarize or omit later sentences.`,
   ];
+  const glossaryBlock = formatGlossaryForPrompt(text, slots);
+  if (glossaryBlock) {
+    lines.push(glossaryBlock);
+  }
   if (strict) {
     lines.push(
-      `- Previous output was still in the source language or script. Translate every part fully into ${targetName} now.`
+      `- Previous output never used ${targetName}. Translate into ${targetName}, keep meaning-critical source words if translating them would change the sense, and copy any __GLOSS_n__ tokens unchanged.`
     );
   }
   lines.push('', `Text: ${text}`);
@@ -260,7 +275,9 @@ const translateText = async ({ text, sourceLanguage, targetLanguage }) => {
       // Make it obvious in audio that we are doing "something" without calling external services.
       return `(${targetLanguage}) ${clean}`;
     case 'openai': {
-      const cacheKey = `${sourceLanguage}->${targetLanguage}:${clean}`;
+      const prepared = canonicalizeGlossaryTerms(String(text || ''));
+      const protectedInput = protectPreservedTerms(prepared);
+      const cacheKey = `${sourceLanguage}->${targetLanguage}:${prepared}`;
       const cached = getCached(cacheKey);
       if (cached) return cached;
 
@@ -326,21 +343,25 @@ const translateText = async ({ text, sourceLanguage, targetLanguage }) => {
 
       let translated = await requestTranslation(
         buildTranslationPrompt({
-          text: clean,
+          text: protectedInput.text,
           sourceLanguage,
           targetLanguage,
+          slots: protectedInput.slots,
         })
       );
+      translated = restorePreservedTerms(translated, protectedInput.slots);
 
       if (translated && hasWrongScriptForTarget(translated, targetLanguage, sourceLanguage)) {
         translated = await requestTranslation(
           buildTranslationPrompt({
-            text: clean,
+            text: protectedInput.text,
             sourceLanguage,
             targetLanguage,
             strict: true,
+            slots: protectedInput.slots,
           })
         );
+        translated = restorePreservedTerms(translated, protectedInput.slots);
       }
 
       const speechReady = toSpeechReadyText(translated);
