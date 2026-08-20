@@ -1,6 +1,7 @@
 const {
   buildTranslationPrompt,
   hasWrongScriptForTarget,
+  isSuspiciouslyShortTranslation,
   languageDisplayName,
 } = require('../src/translation/translate');
 
@@ -46,5 +47,11 @@ describe('translation prompt', () => {
     expect(hasWrongScriptForTarget('August twentieth', 'hi-IN', 'en-US')).toBe(true);
     expect(hasWrongScriptForTarget('कृपया tissue बुक करें', 'hi-IN', 'en-US')).toBe(false);
     expect(hasWrongScriptForTarget('こんにちは', 'en-US', 'ja-JP')).toBe(true);
+  });
+
+  it('flags suspiciously short translations like 192→8', () => {
+    expect(isSuspiciouslyShortTranslation('x'.repeat(192), 'short!!')).toBe(true);
+    expect(isSuspiciouslyShortTranslation('x'.repeat(192), 'y'.repeat(180))).toBe(false);
+    expect(isSuspiciouslyShortTranslation('hi', 'ok')).toBe(false);
   });
 });

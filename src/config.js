@@ -12,11 +12,14 @@ module.exports = {
   DEEPL_API_KEY: process.env.DEEPL_API_KEY || '',
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   OPENAI_TRANSLATION_MODEL: process.env.OPENAI_TRANSLATION_MODEL || 'gpt-5.6',
-  OPENAI_MAX_OUTPUT_TOKENS: parseInt(process.env.OPENAI_MAX_OUTPUT_TOKENS || '400', 10),
+  // Reasoning models count thinking tokens against this budget; keep headroom for visible text.
+  OPENAI_MAX_OUTPUT_TOKENS: parseInt(process.env.OPENAI_MAX_OUTPUT_TOKENS || '2000', 10),
+  // minimal | low | medium | high — lower = less reasoning burn, better for realtime voice.
+  OPENAI_REASONING_EFFORT: process.env.OPENAI_REASONING_EFFORT || 'low',
   CALLER_A_LANG: process.env.CALLER_A_LANG || 'en-US',
   CALLER_B_LANG: process.env.CALLER_B_LANG || 'hi-IN',
-  // 'turn' = translate when prompt.last === true (current behavior)
-  // 'segment' = translate each prompt segment immediately (lower perceived latency, more fragmented speech)
+  // 'turn' = wait for prompt.last === true, then translate once
+  // 'segment' = translate each STT chunk immediately and stream TTS (last:false until final)
   TRANSLATE_MODE: process.env.TRANSLATE_MODE || 'turn',
   // ConversationRelay TTS: ElevenLabs (human + accent), Google (Chirp3-HD), or Amazon.
   TTS_PROVIDER: process.env.TTS_PROVIDER || 'ElevenLabs',

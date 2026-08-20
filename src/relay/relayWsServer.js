@@ -8,7 +8,6 @@ const {
 } = require('./sessionStore');
 
 const { translateText } = require('../translation/translate');
-const TRANSLATE_MODE = config.TRANSLATE_MODE;
 
 /**
  * Attaches a ConversationRelay message handler to a WebSocket connection.
@@ -21,7 +20,7 @@ const handleConversationRelayConnection = (ws) => {
     role: undefined,
     sourceLanguage: undefined,
     targetLanguage: undefined,
-    // Buffer caller speech until `prompt.last === true` so we translate a full turn.
+    // Used by turn mode to buffer caller speech until `prompt.last === true`.
     pendingPromptText: '',
     // Serialize translate+send so overlapping prompts stay in order.
     workQueue: Promise.resolve(),
@@ -40,7 +39,7 @@ const handleConversationRelayConnection = (ws) => {
    * Translates speech and sends (or queues) it to the opposite leg.
    *
    * @param {string} text
-   * @param {boolean} last
+   * @param {boolean} last - ConversationRelay talk-cycle end flag
    */
   const translateAndForward = async (text, last) => {
     if (!text || !state.callSid) return;
@@ -51,6 +50,8 @@ const handleConversationRelayConnection = (ws) => {
         text,
         sourceLanguage: state.sourceLanguage,
         targetLanguage: state.targetLanguage,
+        // Mid-stream segments must not get forced terminal punctuation.
+        speechFinal: last,
       });
     } catch (err) {
       logger.error('[relay] translation failed', { error: err.message });
@@ -59,6 +60,17 @@ const handleConversationRelayConnection = (ws) => {
 
     if (!translated) return;
 
+    logger.info('[relay] translated utterance', {
+      pairId: state.pairId,
+      role: state.role,
+      inputChars: text.length,
+      outputChars: translated.length,
+      last,
+      mode: config.TRANSLATE_MODE,
+    });
+
+    // Stream with last:false until the final STT segment so ConversationRelay queues
+    // TTS instead of starting a new talk cycle / dropping earlier words.
     sendTranslatedToOpposite({
       fromCallSid: state.callSid,
       token: translated,
@@ -119,14 +131,20 @@ const handleConversationRelayConnection = (ws) => {
       case 'prompt': {
         const segment = String(msg.voicePrompt || '');
         const last = !!msg.last;
+        const translateMode = config.TRANSLATE_MODE;
 
         enqueueWork(async () => {
-          if (TRANSLATE_MODE === 'segment') {
+          if (translateMode === 'segment') {
+            // Low-latency path: translate each STT chunk as it arrives and stream TTS.
+            // Keep last:false on mid-utterance tokens so Twilio queues them in one talk cycle
+            // (preemptible stays false unless barge-in set preemptNext).
             if (!segment) return;
             await translateAndForward(segment, last);
+            if (last) state.pendingPromptText = '';
             return;
           }
 
+          // turn mode: buffer until prompt.last === true, then translate once.
           state.pendingPromptText += segment
             ? state.pendingPromptText
               ? ` ${segment}`

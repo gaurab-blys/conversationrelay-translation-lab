@@ -36,6 +36,10 @@ const sendTextChunksToWs = (ws, { token, last, interruptible = true, preemptible
   const chunks = splitSpeechTokens(token, config.TTS_TOKEN_MAX_CHARS);
   if (!chunks.length) return;
 
+  if (chunks.length > 1) {
+    logger.info('[relay] split TTS into chunks', { chunks: chunks.length, totalChars: token.length });
+  }
+
   chunks.forEach((chunk, i) => {
     ws.send(
       JSON.stringify({
