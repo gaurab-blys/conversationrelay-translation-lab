@@ -1,9 +1,127 @@
+const config = require('../config');
 const logger = require('../logger');
+const { splitSpeechTokens } = require('../voice/speechTokens');
 
 const byCallSid = new Map();
 const byPairRole = new Map();
+/** @type {Map<string, Array<{token: string, last: boolean, interruptible: boolean}>>} */
+const pendingByPairRole = new Map();
 
 const roleOpposite = (role) => (role === 'a' ? 'b' : role === 'b' ? 'a' : undefined);
+
+/**
+ * @param {string} pairId
+ * @param {string} role
+ * @returns {string}
+ */
+const pairRoleKey = (pairId, role) => `${pairId}:${role}`;
+
+/**
+ * @param {import('ws').WebSocket|null|undefined} ws
+ * @returns {boolean}
+ */
+const isWsOpen = (ws) => !!(ws && ws.readyState === 1);
+
+/**
+ * Sends one translated utterance as one or more ConversationRelay text tokens.
+ *
+ * @param {import('ws').WebSocket} ws
+ * @param {object} params
+ * @param {string} params.token
+ * @param {boolean} params.last
+ * @param {boolean} [params.interruptible]
+ * @param {boolean} [params.preemptible]
+ */
+const sendTextChunksToWs = (ws, { token, last, interruptible = true, preemptible = false }) => {
+  const chunks = splitSpeechTokens(token, config.TTS_TOKEN_MAX_CHARS);
+  if (!chunks.length) return;
+
+  chunks.forEach((chunk, i) => {
+    ws.send(
+      JSON.stringify({
+        type: 'text',
+        token: chunk,
+        last: !!(last && i === chunks.length - 1),
+        interruptible,
+        preemptible: i === 0 ? !!preemptible : false,
+      })
+    );
+  });
+};
+
+/**
+ * Queues TTS if the destination leg is not connected yet; otherwise sends immediately.
+ *
+ * @param {object} params
+ * @param {string} params.pairId
+ * @param {'a'|'b'} params.toRole
+ * @param {string} params.token
+ * @param {boolean} params.last
+ * @param {boolean} [params.interruptible]
+ */
+const enqueueOrSendText = ({ pairId, toRole, token, last, interruptible = true }) => {
+  if (!pairId || !toRole || !token) return;
+
+  const key = pairRoleKey(pairId, toRole);
+  const dest = byPairRole.get(key);
+  if (isWsOpen(dest?.ws)) {
+    const preemptible = consumePreemptNext(dest);
+    sendTextChunksToWs(dest.ws, { token, last, interruptible, preemptible });
+    return;
+  }
+
+  const max = config.TTS_PENDING_MAX || 30;
+  const queue = pendingByPairRole.get(key) || [];
+  if (queue.length >= max) {
+    queue.shift();
+    logger.warn('[relay] pending TTS queue full; dropped oldest', { pairId, toRole, max });
+  }
+  queue.push({ token, last, interruptible });
+  pendingByPairRole.set(key, queue);
+  logger.info('[relay] queued TTS until opposite leg is ready', {
+    pairId,
+    toRole,
+    queued: queue.length,
+  });
+};
+
+/**
+ * Plays any TTS that arrived before this leg's WebSocket was ready.
+ *
+ * @param {string} pairId
+ * @param {'a'|'b'} role
+ */
+const flushPendingForLeg = (pairId, role) => {
+  const key = pairRoleKey(pairId, role);
+  const queue = pendingByPairRole.get(key);
+  if (!queue || !queue.length) return;
+
+  const dest = byPairRole.get(key);
+  if (!isWsOpen(dest?.ws)) return;
+
+  pendingByPairRole.delete(key);
+  logger.info('[relay] flushing queued TTS', { pairId, role, count: queue.length });
+
+  queue.forEach((msg, i) => {
+    const preemptible = i === 0 ? consumePreemptNext(dest) : false;
+    sendTextChunksToWs(dest.ws, {
+      token: msg.token,
+      last: msg.last,
+      interruptible: msg.interruptible,
+      preemptible,
+    });
+  });
+};
+
+/**
+ * Drops queued TTS for a destination (used on barge-in).
+ *
+ * @param {string} pairId
+ * @param {'a'|'b'} role
+ */
+const clearPendingForLeg = (pairId, role) => {
+  pendingByPairRole.delete(pairRoleKey(pairId, role));
+};
 
 /**
  * Registers a ConversationRelay "leg" (one PSTN caller side) so we can bridge prompts to the opposite leg.
@@ -27,7 +145,7 @@ const upsertLeg = ({
 }) => {
   if (!pairId || !role || !callSid) return;
 
-  const key = `${pairId}:${role}`;
+  const key = pairRoleKey(pairId, role);
 
   const existing = byPairRole.get(key);
   const entry = {
@@ -44,6 +162,7 @@ const upsertLeg = ({
 
   byPairRole.set(key, entry);
   byCallSid.set(callSid, entry);
+  flushPendingForLeg(pairId, role);
 };
 
 /**
@@ -58,7 +177,7 @@ const removeLegByCallSid = (callSid) => {
   const entry = byCallSid.get(callSid);
   if (!entry) return;
 
-  const key = `${entry.pairId}:${entry.role}`;
+  const key = pairRoleKey(entry.pairId, entry.role);
   const updated = { ...entry, ws: null };
 
   byPairRole.set(key, updated);
@@ -67,16 +186,20 @@ const removeLegByCallSid = (callSid) => {
 
 /**
  * Marks that the opposite leg should use `preemptible:true` for its next TTS output.
+ * Also drops queued TTS for that listener so stale translations are not played after barge-in.
+ *
  * @param {string} pairId
  * @param {'a'|'b'} fromRole - The role that caused the interrupt.
  */
 const markOppositePreemptNext = (pairId, fromRole) => {
   const opposite = roleOpposite(fromRole);
   if (!opposite) return;
-  const entry = byPairRole.get(`${pairId}:${opposite}`);
-  if (!entry) return;
-  entry.preemptNext = true;
-  byPairRole.set(`${pairId}:${opposite}`, entry);
+  const entry = byPairRole.get(pairRoleKey(pairId, opposite));
+  if (entry) {
+    entry.preemptNext = true;
+    byPairRole.set(pairRoleKey(pairId, opposite), entry);
+  }
+  clearPendingForLeg(pairId, opposite);
 };
 
 /**
@@ -89,7 +212,31 @@ const getOppositeLegByCallSid = (callSid) => {
   if (!entry) return undefined;
   const opposite = roleOpposite(entry.role);
   if (!opposite) return undefined;
-  return byPairRole.get(`${entry.pairId}:${opposite}`);
+  return byPairRole.get(pairRoleKey(entry.pairId, opposite));
+};
+
+/**
+ * Sends (or queues) translated speech to the opposite party.
+ *
+ * @param {object} params
+ * @param {string} params.fromCallSid
+ * @param {string} params.token
+ * @param {boolean} params.last
+ */
+const sendTranslatedToOpposite = ({ fromCallSid, token, last }) => {
+  const from = byCallSid.get(fromCallSid);
+  if (!from) {
+    logger.warn('[relay] cannot send translation; unknown fromCallSid', { fromCallSid });
+    return;
+  }
+  const toRole = roleOpposite(from.role);
+  if (!toRole) return;
+  enqueueOrSendText({
+    pairId: from.pairId,
+    toRole,
+    token,
+    last,
+  });
 };
 
 /**
@@ -101,7 +248,7 @@ const consumePreemptNext = (legEntry) => {
   if (!legEntry) return false;
   const current = !!legEntry.preemptNext;
   legEntry.preemptNext = false;
-  byPairRole.set(`${legEntry.pairId}:${legEntry.role}`, legEntry);
+  byPairRole.set(pairRoleKey(legEntry.pairId, legEntry.role), legEntry);
   byCallSid.set(legEntry.callSid, legEntry);
   return current;
 };
@@ -116,7 +263,8 @@ module.exports = {
   removeLegByCallSid,
   markOppositePreemptNext,
   getOppositeLegByCallSid,
+  sendTranslatedToOpposite,
   consumePreemptNext,
   getLegByCallSid,
+  roleOpposite,
 };
-

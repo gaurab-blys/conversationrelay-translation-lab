@@ -123,7 +123,7 @@ const translateText = async ({ text, sourceLanguage, targetLanguage }) => {
         `- Preserve meaning, but make it sound natural for the target language.`,
         `- Add appropriate punctuation for speech (commas/periods) when needed.`,
         `- Do not add quotes, headings, or explanations.`,
-        `- Output should be short enough to speak comfortably in one turn.`,
+        `- Keep the full meaning; do not summarize or omit later sentences.`,
         '',
         `Text: ${clean}`,
       ].join('\n');

@@ -15,8 +15,15 @@ const createMockWs = () => {
   };
 };
 
+const flush = async () => {
+  for (let i = 0; i < 6; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await Promise.resolve();
+  }
+};
+
 describe('ConversationRelay WS bridge (translation)', () => {
-  it('bridges prompt(last=true) from leg a to leg b', () => {
+  it('bridges prompt(last=true) from leg a to leg b', async () => {
     const wsA = createMockWs();
     const wsB = createMockWs();
 
@@ -63,18 +70,16 @@ describe('ConversationRelay WS bridge (translation)', () => {
       })
     );
 
-    // Handler is async; flush microtasks.
-    return Promise.resolve().then(() => {
-      expect(wsB.send).toHaveBeenCalledTimes(1);
-      const payload = JSON.parse(wsB.send.mock.calls[0][0]);
-      expect(payload.type).toBe('text');
-      expect(payload.last).toBe(true);
-      // Stub translation includes target language prefix.
-      expect(payload.token).toBe('(hi-IN) Hello');
-    });
+    await flush();
+
+    expect(wsB.send).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(wsB.send.mock.calls[0][0]);
+    expect(payload.type).toBe('text');
+    expect(payload.last).toBe(true);
+    expect(payload.token).toBe('(hi-IN) Hello');
   });
 
-  it('sets preemptible on next outgoing token after interrupt', () => {
+  it('sets preemptible on next outgoing token after interrupt', async () => {
     const wsA = createMockWs();
     const wsB = createMockWs();
 
@@ -111,7 +116,6 @@ describe('ConversationRelay WS bridge (translation)', () => {
       })
     );
 
-    // Interrupt from leg a should preempt TTS on the opposite leg (b).
     wsA.emit(
       'message',
       JSON.stringify({
@@ -130,12 +134,67 @@ describe('ConversationRelay WS bridge (translation)', () => {
       })
     );
 
-    return Promise.resolve().then(() => {
-      expect(wsB.send).toHaveBeenCalledTimes(1);
-      const payload = JSON.parse(wsB.send.mock.calls[0][0]);
-      expect(payload.preemptible).toBe(true);
-      expect(payload.token).toBe('(hi-IN) Next sentence');
-    });
+    await flush();
+
+    expect(wsB.send).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(wsB.send.mock.calls[0][0]);
+    expect(payload.preemptible).toBe(true);
+    expect(payload.token).toBe('(hi-IN) Next sentence');
+  });
+
+  it('queues translation until the opposite leg connects', async () => {
+    const wsA = createMockWs();
+    const wsB = createMockWs();
+
+    handleConversationRelayConnection(wsA);
+    handleConversationRelayConnection(wsB);
+
+    const pairId = 'pair-test-queue';
+    wsA.emit(
+      'message',
+      JSON.stringify({
+        type: 'setup',
+        sessionId: 'S_AQ',
+        callSid: 'CA_AQ',
+        customParameters: {
+          pairId,
+          role: 'a',
+          sourceLanguage: 'en-US',
+          targetLanguage: 'hi-IN',
+        },
+      })
+    );
+
+    wsA.emit(
+      'message',
+      JSON.stringify({
+        type: 'prompt',
+        voicePrompt: 'Please wait for the other person',
+        last: true,
+      })
+    );
+
+    await flush();
+    expect(wsB.send).not.toHaveBeenCalled();
+
+    wsB.emit(
+      'message',
+      JSON.stringify({
+        type: 'setup',
+        sessionId: 'S_BQ',
+        callSid: 'CA_BQ',
+        customParameters: {
+          pairId,
+          role: 'b',
+          sourceLanguage: 'hi-IN',
+          targetLanguage: 'en-US',
+        },
+      })
+    );
+
+    expect(wsB.send).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(wsB.send.mock.calls[0][0]);
+    expect(payload.token).toBe('(hi-IN) Please wait for the other person');
+    expect(payload.last).toBe(true);
   });
 });
-

@@ -12,7 +12,7 @@ module.exports = {
   DEEPL_API_KEY: process.env.DEEPL_API_KEY || '',
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   OPENAI_TRANSLATION_MODEL: process.env.OPENAI_TRANSLATION_MODEL || 'gpt-5.6',
-  OPENAI_MAX_OUTPUT_TOKENS: parseInt(process.env.OPENAI_MAX_OUTPUT_TOKENS || '120', 10),
+  OPENAI_MAX_OUTPUT_TOKENS: parseInt(process.env.OPENAI_MAX_OUTPUT_TOKENS || '400', 10),
   CALLER_A_LANG: process.env.CALLER_A_LANG || 'en-US',
   CALLER_B_LANG: process.env.CALLER_B_LANG || 'hi-IN',
   // 'turn' = translate when prompt.last === true (current behavior)
@@ -38,4 +38,8 @@ module.exports = {
   // Optional explicit voice IDs (ElevenLabs ID, or Google/Amazon voice name).
   TTS_VOICE_EN: process.env.TTS_VOICE_EN || '',
   TTS_VOICE_HI: process.env.TTS_VOICE_HI || '',
+  // Max characters per ConversationRelay TTS token. Longer translations are split.
+  TTS_TOKEN_MAX_CHARS: parseInt(process.env.TTS_TOKEN_MAX_CHARS || '280', 10),
+  // Max queued TTS messages while the opposite leg is still connecting.
+  TTS_PENDING_MAX: parseInt(process.env.TTS_PENDING_MAX || '30', 10),
 };
