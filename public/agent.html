@@ -157,11 +157,14 @@
           activeCall = await device.connect({ params: { To, From } });
           setInCall(true);
           setStatus('Connected — client phone should ring.');
-          activeCall.on('disconnect', () => {
+          const onCallEnded = () => {
             activeCall = null;
             setInCall(false);
             setStatus('Call ended.');
-          });
+          };
+          activeCall.on('disconnect', onCallEnded);
+          activeCall.on('cancel', onCallEnded);
+          activeCall.on('reject', onCallEnded);
         } catch (err) {
           setStatus('Connect failed: ' + err.message);
         }

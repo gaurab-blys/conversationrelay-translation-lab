@@ -258,6 +258,39 @@ const consumePreemptNext = (legEntry) => {
  */
 const getLegByCallSid = (callSid) => byCallSid.get(callSid);
 
+/**
+ * Ends the opposite ConversationRelay session (if still open) when one party hangs up.
+ *
+ * @param {string} callSid
+ * @returns {object|undefined} opposite leg, if any
+ */
+const endOppositeSession = (callSid) => {
+  const opposite = getOppositeLegByCallSid(callSid);
+  if (!opposite) return undefined;
+
+  clearPendingForLeg(opposite.pairId, opposite.role);
+  const from = byCallSid.get(callSid);
+  if (from) clearPendingForLeg(from.pairId, from.role);
+
+  if (isWsOpen(opposite.ws)) {
+    try {
+      opposite.ws.send(
+        JSON.stringify({
+          type: 'end',
+          handoffData: JSON.stringify({ reason: 'peer-hangup' }),
+        })
+      );
+    } catch (err) {
+      logger.warn('[relay] failed to send end to opposite leg', {
+        callSid: opposite.callSid,
+        error: err.message,
+      });
+    }
+  }
+
+  return opposite;
+};
+
 module.exports = {
   upsertLeg,
   removeLegByCallSid,
@@ -266,5 +299,6 @@ module.exports = {
   sendTranslatedToOpposite,
   consumePreemptNext,
   getLegByCallSid,
+  endOppositeSession,
   roleOpposite,
 };

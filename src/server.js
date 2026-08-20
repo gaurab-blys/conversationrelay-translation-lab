@@ -25,9 +25,10 @@ app.use(express.json());
 const PORT = config.PORT;
 
 const connectActionUrl = `${config.WEBHOOK_BASE_URL}/voice/connect-action`;
+const callStatusUrl = `${config.WEBHOOK_BASE_URL}/voice/call-status`;
 const relayWsUrl =
   config.WEBHOOK_BASE_URL.replace(/^https:/, 'wss:').replace(/^http:/, 'ws') + '/voice/relay-ws';
-const { getLegByCallSid } = require('./relay/sessionStore');
+const { getLegByCallSid, endOppositeSession } = require('./relay/sessionStore');
 
 /**
  * Voice token for the browser agent (Twilio Voice SDK).
@@ -89,6 +90,9 @@ app.post('/api/v2/webhook/twilio/voice', async (req, res) => {
     await twilioClient.calls.create({
       from: config.TWILIO_FROM_NUMBER,
       to: otherTo,
+      statusCallback: callStatusUrl,
+      statusCallbackEvent: ['completed', 'busy', 'no-answer', 'canceled', 'failed'],
+      statusCallbackMethod: 'POST',
       twiml: buildLegTwiML({
         pairId,
         role: 'b',
@@ -118,61 +122,101 @@ app.post('/api/v2/webhook/twilio/voice', async (req, res) => {
 });
 
 /**
+ * Hangs up the other party when one leg leaves the translation pair.
+ *
+ * @param {string} callSid
+ */
+const hangupOppositeLeg = async (callSid) => {
+  const opposite = endOppositeSession(callSid);
+  if (!opposite?.callSid || !twilioClient) return;
+
+  try {
+    await twilioClient.calls(opposite.callSid).update({ status: 'completed' });
+    logger.info('[pairing] hung up opposite call', {
+      fromCallSid: callSid,
+      oppositeCallSid: opposite.callSid,
+      oppositeRole: opposite.role,
+    });
+  } catch (err) {
+    logger.warn('[pairing] opposite hangup failed', {
+      fromCallSid: callSid,
+      oppositeCallSid: opposite.callSid,
+      error: err.message,
+    });
+  }
+};
+
+/**
  * Connect action callback.
  *
- * Per Twilio docs, this can be used to restore ConversationRelay by returning new TwiML when
- * the session ends in a failed/unexpected state.
- *
- * This is currently a placeholder; the reconnect logic will be implemented in the reconnect-action
- * TODO once sessionStore exists.
+ * Restores ConversationRelay only if the session failed while the call is still up.
+ * On a normal hangup (`completed` / `ended`), hang up the paired agent/client call too.
  */
-app.post('/voice/connect-action', (req, res) => {
+app.post('/voice/connect-action', async (req, res) => {
   const callSid = req.body.CallSid || req.body.callSid;
-  const sessionStatus = req.body.SessionStatus || req.body.sessionStatus;
+  const callStatus = String(req.body.CallStatus || req.body.callStatus || '').toLowerCase();
+  const sessionStatus = String(req.body.SessionStatus || req.body.sessionStatus || '').toLowerCase();
   const errorCode = req.body.ErrorCode || req.body.errorCode;
 
-  // Per Twilio docs, SessionStatus can be `ended` or `failed`.
-  // On failure/unexpected disconnect we return new TwiML to restore ConversationRelay.
-  if (sessionStatus === 'ended') {
-    res.status(200).type('text/xml').send('<Response></Response>');
-    return;
+  const callStillActive = callStatus === 'in-progress' || callStatus === 'ringing';
+  const sessionFailed = sessionStatus === 'failed';
+  const peerLeft =
+    sessionStatus === 'ended' ||
+    sessionStatus === 'completed' ||
+    ['completed', 'canceled', 'busy', 'no-answer'].includes(callStatus);
+
+  if (sessionFailed && callStillActive && callSid) {
+    const leg = getLegByCallSid(callSid);
+    if (leg) {
+      logger.warn('[connect-action] restoring ConversationRelay session', {
+        callSid,
+        pairId: leg.pairId,
+        role: leg.role,
+        sessionStatus,
+        errorCode,
+      });
+      const twiml = buildLegTwiML({
+        pairId: leg.pairId,
+        role: leg.role,
+        sourceLanguage: leg.sourceLanguage,
+        targetLanguage: leg.targetLanguage,
+        connectActionUrl,
+        conversationRelayWsUrl: relayWsUrl,
+      });
+      res.status(200).type('text/xml').send(twiml);
+      return;
+    }
   }
 
-  if (!callSid) {
-    logger.warn('[connect-action] missing CallSid', { sessionStatus, errorCode });
-    res.status(200).type('text/xml').send('<Response></Response>');
-    return;
-  }
-
-  const leg = getLegByCallSid(callSid);
-  if (!leg) {
-    logger.warn('[connect-action] no sessionStore mapping for callSid', {
+  if (peerLeft && callSid) {
+    logger.info('[connect-action] peer left; hanging up opposite leg', {
       callSid,
       sessionStatus,
-      errorCode,
+      callStatus,
     });
-    res.status(200).type('text/xml').send('<Response></Response>');
-    return;
+    hangupOppositeLeg(callSid).catch((err) => {
+      logger.warn('[connect-action] hangupOppositeLeg failed', { error: err.message });
+    });
   }
 
-  logger.warn('[connect-action] restoring ConversationRelay session', {
-    callSid,
-    pairId: leg.pairId,
-    role: leg.role,
-    sessionStatus,
-    errorCode,
-  });
+  res.status(200).type('text/xml').send('<Response></Response>');
+});
 
-  const twiml = buildLegTwiML({
-    pairId: leg.pairId,
-    role: leg.role,
-    sourceLanguage: leg.sourceLanguage,
-    targetLanguage: leg.targetLanguage,
-    connectActionUrl,
-    conversationRelayWsUrl: relayWsUrl,
-  });
+/**
+ * PSTN/client call status. If the client phone ends, hang up the browser agent too.
+ */
+app.post('/voice/call-status', async (req, res) => {
+  const callSid = req.body.CallSid || req.body.callSid;
+  const callStatus = String(req.body.CallStatus || req.body.callStatus || '').toLowerCase();
 
-  res.status(200).type('text/xml').send(twiml);
+  if (callSid && ['completed', 'canceled', 'busy', 'no-answer', 'failed'].includes(callStatus)) {
+    logger.info('[call-status] terminal status; hanging up opposite leg', { callSid, callStatus });
+    hangupOppositeLeg(callSid).catch((err) => {
+      logger.warn('[call-status] hangupOppositeLeg failed', { error: err.message });
+    });
+  }
+
+  res.status(204).end();
 });
 
 const server = http.createServer(app);
@@ -200,6 +244,7 @@ server.on('upgrade', (req, socket, head) => {
 server.listen(PORT, () => {
   logger.info(`[server] listening on port ${PORT}`);
   logger.info('[server] connectActionUrl', { connectActionUrl });
+  logger.info('[server] callStatusUrl', { callStatusUrl });
   logger.info('[server] relayWsUrl', { relayWsUrl });
 });
 
