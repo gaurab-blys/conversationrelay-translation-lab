@@ -1,0 +1,377 @@
+source,target
+Blys,Blys
+Gaurab,Gaurab
+Swedish Relaxation,Swedish Relaxation
+Remedial Deep Tissue,Remedial Deep Tissue
+Sports Massage,Sports Massage
+Pregnancy Massage,Pregnancy Massage
+Aromatherapy,Aromatherapy
+Lymphatic Drainage,Lymphatic Drainage
+Hot Stone,Hot Stone
+Scalp and Head,Scalp and Head
+Reflexology,Reflexology
+Thai Massage,Thai Massage
+Cupping,Cupping
+Oncology Massage,Oncology Massage
+Medical Massage,Medical Massage
+Hotel Massage,Hotel Massage
+Aged Care Massage,Aged Care Massage
+Home Care Massage,Home Care Massage
+Chair Massage,Chair Massage
+Table Massage,Table Massage
+Roving Massage,Roving Massage
+Corporate Massage,Corporate Massage
+Mobile Massage,Mobile Massage
+Couples Massage,Couples Massage
+Singles Massage,Singles Massage
+Back to Back,Back to Back
+Group Booking,Group Booking
+Facials,Facials
+Pamper Packages,Pamper Packages
+Hair and Makeup,Hair and Makeup
+Haircuts,Haircuts
+Hair Colouring,Hair Colouring
+Bridal,Bridal
+Brows & Lashes,Brows & Lashes
+Spray Tan,Spray Tan
+Waxing,Waxing
+Gel Shellac,Gel Shellac
+Yoga,Yoga
+Pilates,Pilates
+Physiotherapy,Physiotherapy
+Dry Needling,Dry Needling
+Telehealth,Telehealth
+Gift Voucher,Gift Voucher
+Provider Directory,Provider Directory
+Direct Booking,Direct Booking
+Past Bookings,Past Bookings
+Favourites,Favourites
+Rebook,Rebook
+Notes for Therapist,Notes for Therapist
+Massage Table,Massage Table
+Platform Fee,Platform Fee
+Health Fund,Health Fund
+Cancellation Policy,Cancellation Policy
+Same Day,Same Day
+One off,One off
+Every week,Every week
+Every 2 weeks,Every 2 weeks
+Every 3 weeks,Every 3 weeks
+Every 4 weeks,Every 4 weeks
+Afterpay,Afterpay
+Klarna,Klarna
+PayPal,PayPal
+Apple Pay,Apple Pay
+Google Pay,Google Pay
+NDIS,NDIS
+HSA,HSA
+Pay with Invoice,Pay with Invoice
+Stand alone only,Stand alone only
+Add-on only,Add-on only
+Stand alone and add-on,Stand alone and add-on
+Spa Clinic Gym,Spa Clinic Gym
+Blys App,Blys App
+Booking,Booking
+Booking ID,Booking ID
+Booking Status,Booking Status
+Booking Confirmation,Booking Confirmation
+Booking Details,Booking Details
+Booking Request,Booking Request
+Booking Time,Booking Time
+Booking Date,Booking Date
+Booking Fee,Booking Fee
+Booking Duration,Booking Duration
+Booking Cancellation,Booking Cancellation
+Booking History,Booking History
+New Booking,New Booking
+Upcoming Booking,Upcoming Booking
+Past Booking,Past Booking
+Cancelled Booking,Cancelled Booking
+Completed Booking,Completed Booking
+Pending Booking,Pending Booking
+Reschedule Booking,Reschedule Booking
+Cancel Booking,Cancel Booking
+Confirm Booking,Confirm Booking
+Modify Booking,Modify Booking
+Service,Service
+Service Type,Service Type
+Service Details,Service Details
+Service Duration,Service Duration
+Service Price,Service Price
+Service Fee,Service Fee
+Home Service,Home Service
+Mobile Service,Mobile Service
+Massage Service,Massage Service
+Beauty Service,Beauty Service
+Wellness Service,Wellness Service
+Provider,Provider
+Provider Profile,Provider Profile
+Provider Details,Provider Details
+Provider Availability,Provider Availability
+Provider Rating,Provider Rating
+Provider Review,Provider Review
+Provider Location,Provider Location
+Provider Fee,Provider Fee
+Provider Status,Provider Status
+Client,Client
+Client Details,Client Details
+Client Address,Client Address
+Client Location,Client Location
+Availability,Availability
+Available Time Slot,Available Time Slot
+Time Slot,Time Slot
+Preferred Time,Preferred Time
+Preferred Date,Preferred Date
+Available Provider,Available Provider
+Service Area,Service Area
+Location,Location
+Service Address,Service Address
+Saved Address,Saved Address
+Arrival Time,Arrival Time
+Estimated Arrival Time,Estimated Arrival Time
+Payment,Payment
+Payment Method,Payment Method
+Payment Status,Payment Status
+Payment Confirmation,Payment Confirmation
+Payment Failed,Payment Failed
+Payment Pending,Payment Pending
+Refund,Refund
+Refund Status,Refund Status
+Refund Amount,Refund Amount
+Cancellation,Cancellation
+Cancellation Fee,Cancellation Fee
+Cancellation Reason,Cancellation Reason
+Late Cancellation,Late Cancellation
+No-show,No-show
+Accept Booking,Accept Booking
+Decline Booking,Decline Booking
+Job,Job
+Job Details,Job Details
+Job Status,Job Status
+Show Job,Show Job
+Message,Message
+Messages,Messages
+Conversation,Conversation
+Inbox,Inbox
+Unread Message,Unread Message
+Send Message,Send Message
+Message Notification,Message Notification
+Push Notification,Push Notification
+Notification,Notification
+Profile,Profile
+Account,Account
+Customer Support,Customer Support
+Support Request,Support Request
+Coupon,Coupon
+Discount Code,Discount Code
+Total Price,Total Price
+Subtotal,Subtotal
+Tip,Tip
+Review,Review
+Rating,Rating
+Five Star Rating,Five Star Rating
+Service Provider,Service Provider
+Professional,Professional
+Therapist,Therapist
+Massage Therapist,Massage Therapist
+Beauty Therapist,Beauty Therapist
+Wellness Therapist,Wellness Therapist
+Treatment,Treatment
+Treatment Type,Treatment Type
+Treatment Duration,Treatment Duration
+Treatment Price,Treatment Price
+Massage,Massage
+Relaxation Massage,Relaxation Massage
+Beauty Treatment,Beauty Treatment
+Wellness Treatment,Wellness Treatment
+Appointment,Appointment
+Appointment Time,Appointment Time
+Appointment Date,Appointment Date
+Appointment Status,Appointment Status
+Appointment Confirmation,Appointment Confirmation
+Service Request,Service Request
+Service Request Status,Service Request Status
+Request Accepted,Request Accepted
+Request Declined,Request Declined
+Request Cancelled,Request Cancelled
+Request Pending,Request Pending
+Provider Accepted,Provider Accepted
+Provider Declined,Provider Declined
+Provider Cancelled,Provider Cancelled
+Client Cancelled,Client Cancelled
+Client Request,Client Request
+Provider Request,Provider Request
+Booking Link,Booking Link
+Booking Page,Booking Page
+Booking Flow,Booking Flow
+Checkout,Checkout
+Checkout Page,Checkout Page
+Order Summary,Order Summary
+Price Breakdown,Price Breakdown
+Service Cost,Service Cost
+Travel Fee,Travel Fee
+Cancellation Charge,Cancellation Charge
+Payment Link,Payment Link
+Payment Receipt,Payment Receipt
+Invoice,Invoice
+Invoice Number,Invoice Number
+Credit Card,Credit Card
+Debit Card,Debit Card
+Card Payment,Card Payment
+Online Payment,Online Payment
+Payment Processing,Payment Processing
+Payment Completed,Payment Completed
+Payment Declined,Payment Declined
+Payment Error,Payment Error
+Payment Refund,Payment Refund
+Refund Policy,Refund Policy
+Refund Request,Refund Request
+Refund Completed,Refund Completed
+Promo Code,Promo Code
+Promotion,Promotion
+Discount,Discount
+Discount Amount,Discount Amount
+Discount Applied,Discount Applied
+Coupon Code,Coupon Code
+Coupon Expiry,Coupon Expiry
+Tip Amount,Tip Amount
+Tip Payment,Tip Payment
+Earnings,Earnings
+Provider Earnings,Provider Earnings
+Provider Payout,Provider Payout
+Payout Status,Payout Status
+Payout Date,Payout Date
+Payout Amount,Payout Amount
+Availability Status,Availability Status
+Available,Available
+Unavailable,Unavailable
+Online,Online
+Offline,Offline
+Working Hours,Working Hours
+Service Hours,Service Hours
+Travel Time,Travel Time
+Travel Distance,Travel Distance
+Arrival,Arrival
+Arrived,Arrived
+On the Way,On the Way
+Service Started,Service Started
+Service Completed,Service Completed
+Booking Completed,Booking Completed
+Booking Declined,Booking Declined
+Booking Expired,Booking Expired
+Booking Reference,Booking Reference
+Spa Service,Spa Service
+Treatment Service,Treatment Service
+Therapy,Therapy
+Qualified Therapist,Qualified Therapist
+Professional Therapist,Professional Therapist
+Practitioner,Practitioner
+Specialist,Specialist
+Therapist Profile,Therapist Profile
+Therapist Details,Therapist Details
+Therapist Availability,Therapist Availability
+Therapist Rating,Therapist Rating
+Therapist Review,Therapist Review
+Therapist Experience,Therapist Experience
+Therapist Qualification,Therapist Qualification
+Therapist Speciality,Therapist Speciality
+Therapist Location,Therapist Location
+Therapist Arrival,Therapist Arrival
+Therapist Travel Time,Therapist Travel Time
+Therapist Status,Therapist Status
+Service Category,Service Category
+Service Name,Service Name
+Service Description,Service Description
+Service Availability,Service Availability
+Service Location,Service Location
+Service Selection,Service Selection
+Service Option,Service Option
+Service Package,Service Package
+Service Menu,Service Menu
+Available Services,Available Services
+Selected Service,Selected Service
+Primary Service,Primary Service
+Main Service,Main Service
+Additional Service,Additional Service
+Add-ons,Add-ons
+Add-on Service,Add-on Service
+Add-on Treatment,Add-on Treatment
+Add-on Option,Add-on Option
+Add-on Price,Add-on Price
+Add-on Cost,Add-on Cost
+Add-on Duration,Add-on Duration
+Add-on Selection,Add-on Selection
+Selected Add-on,Selected Add-on
+Optional Add-on,Optional Add-on
+Additional Treatment,Additional Treatment
+Extra Service,Extra Service
+Extra Treatment,Extra Treatment
+Upgrade,Upgrade
+Service Upgrade,Service Upgrade
+Treatment Upgrade,Treatment Upgrade
+Package Upgrade,Package Upgrade
+Premium Service,Premium Service
+Standard Service,Standard Service
+Specialised Service,Specialised Service
+Custom Service,Custom Service
+Custom Treatment,Custom Treatment
+Massage Type,Massage Type
+Postnatal Massage,Postnatal Massage
+Foot Massage,Foot Massage
+Head Massage,Head Massage
+Neck Massage,Neck Massage
+Shoulder Massage,Shoulder Massage
+Back Massage,Back Massage
+Full Body Massage,Full Body Massage
+Skincare Treatment,Skincare Treatment
+Body Treatment,Body Treatment
+Treatment Area,Treatment Area
+Treatment Preference,Treatment Preference
+Pressure Preference,Pressure Preference
+Massage Pressure,Massage Pressure
+Firm Pressure,Firm Pressure
+Medium Pressure,Medium Pressure
+Light Pressure,Light Pressure
+Treatment Room,Treatment Room
+Treatment Table,Treatment Table
+Massage Oil,Massage Oil
+Essential Oil,Essential Oil
+Aromatherapy Oil,Aromatherapy Oil
+Towel,Towel
+Linen,Linen
+Equipment,Equipment
+Therapist Equipment,Therapist Equipment
+Service Equipment,Service Equipment
+Mobile Treatment,Mobile Treatment
+In-home Treatment,In-home Treatment
+At-home Service,At-home Service
+Home Beauty Service,Home Beauty Service
+Home Wellness Service,Home Wellness Service
+Service Start Time,Service Start Time
+Service End Time,Service End Time
+Arrival Window,Arrival Window
+Payment Amount,Payment Amount
+Payment Details,Payment Details
+Payment Authorisation,Payment Authorisation
+Payment Authorised,Payment Authorised
+Payment Verification,Payment Verification
+Payment Request,Payment Request
+Payment History,Payment History
+Payment Transaction,Payment Transaction
+Transaction ID,Transaction ID
+Transaction Status,Transaction Status
+Transaction Fee,Transaction Fee
+Transaction Amount,Transaction Amount
+Digital Payment,Digital Payment
+Payment Gateway,Payment Gateway
+Billing,Billing
+Billing Details,Billing Details
+Billing Address,Billing Address
+Invoice Amount,Invoice Amount
+Invoice Status,Invoice Status
+Tax,Tax
+GST,GST
+Service Charge,Service Charge
+Additional Fee,Additional Fee
+Late Cancellation Fee,Late Cancellation Fee
+Total Amount,Total Amount
